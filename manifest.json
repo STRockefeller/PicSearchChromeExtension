@@ -1,9 +1,9 @@
 {
     "name": "Rockefeller's Picture Search Extension",
-    "description": "圖片搜尋小助手，提供右鍵選單快速搜索以及Pixiv進階搜索設定。",
-    "version": "1.0",
+    "description": "A picture search helper. ",
+    "version": "0.1.0",
     "manifest_version": 2,
-    "content_security_policy": "script-src 'self' 'unsafe-eval';script-src-elem 'self' http://localhost https://unpkg.com/ https://ajax.googleapis.com/ https://cdnjs.cloudflare.com/ https://maxcdn.bootstrapcdn.com/bootstrap/ https://cdn.jsdelivr.net/; object-src 'self'",
+    "content_security_policy": "script-src 'self' ;script-src-elem 'self'; object-src 'self'",
     "permissions": ["contextMenus","storage"], 
     "browser_action":{
         "default_icon":"icons/Icon-192.png",
