@@ -19,11 +19,10 @@ function save_options():void {
         status.textContent = 'Options saved.';
         setTimeout(function () {
             status.textContent = '';
-        }, 750);
+        }, 1500);
+        chrome.runtime.sendMessage("Options changed");
     });
 }
-
-
 function restore_options():void {
     chrome.storage.sync.get({
         enableCreativeCommons: true,

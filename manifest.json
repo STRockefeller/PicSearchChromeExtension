@@ -1,20 +1,17 @@
 {
-    "name": "Rockefeller's Picture Search Extension",
-    "description": "A picture search helper. ",
+    "name": "More image - More idea - More inspiration",
+    "description": "An image search helper. ",
     "version": "0.1.0",
-    "manifest_version": 2,
-    "content_security_policy": "script-src 'self' ;script-src-elem 'self'; object-src 'self'",
-    "permissions": ["contextMenus","storage"], 
-    "browser_action":{
-        "default_icon":"icons/Icon-192.png",
-        "default_popup":"popup.html"
+    "manifest_version": 3,
+    "permissions": ["contextMenus", "storage"],
+    "action": {
+        "default_icon": "icons/Icon-192.png",
+        "default_popup": "popup.html"
     },
     "options_ui": {
-        "page": "options.html",
-        "chrome_style": true
-      },
-    "background":{
-        "scripts":["event.js"],
-        "persistent":true
+        "page": "options.html"
+    },
+    "background": {
+        "service_worker": "event.js"
     }
 }

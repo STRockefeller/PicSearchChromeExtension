@@ -19,7 +19,8 @@ function save_options() {
         status.textContent = 'Options saved.';
         setTimeout(function () {
             status.textContent = '';
-        }, 750);
+        }, 1500);
+        chrome.runtime.sendMessage("Options changed");
     });
 }
 function restore_options() {

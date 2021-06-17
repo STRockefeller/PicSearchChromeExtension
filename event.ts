@@ -41,6 +41,32 @@ function onClickPixiv(info, tab): void {
     }
     link("https://www.pixiv.net/tags/" + info.selectionText + extraKeywords + "/artworks?s_mode=s_tag");
 }
+chrome.contextMenus.onClicked.addListener(function (info, tab): void {
+    switch (info.menuItemId) {
+        case "Pinterest":
+            onClickPinterest(info, tab);
+            break;
+        case "Unsplash":
+            onClickUnsplash(info, tab);
+            break;
+        case "CreativeCommons":
+            onClickCreativeCommons(info, tab);
+            break;
+        case "Pexel":
+            onClickPexel(info, tab);
+            break;
+        case "PixaBay":
+            onClickPixaBay(info, tab);
+            break;
+        case "Pixiv":
+            onClickPixiv(info, tab);
+            break;
+        default:
+            console.log("onClickedListener undefined value");
+            console.log(info.menuItemId);
+            break;
+    }
+});
 function initialization(): void {
     chrome.storage.sync.get({
         enableCreativeCommons: true,
@@ -63,63 +89,79 @@ function initialization(): void {
 }
 function createMenu(): void {
     var parent = chrome.contextMenus.create({
+        "id": "parent",
         "title": "Search %s by",
         "contexts": ['all'],
-        //"onclick": genericOnClick  
     });
     if (enableUnsplash) {
         var Unsplash = chrome.contextMenus.create({
+            "id": "Unsplash",
             "title": "Unsplash",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            "onclick": onClickUnsplash
+            //"onclick": onClickUnsplash
         });
     }
     if (enableCreativeCommons) {
         var CreativeCommons = chrome.contextMenus.create({
+            "id": "CreativeCommons",
             "title": "Creative Commons",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            "onclick": onClickCreativeCommons
+            //"onclick": onClickCreativeCommons
         });
     }
     if (enablePinterest) {
         var Pinterest = chrome.contextMenus.create({
+            "id": "Pinterest",
             "title": "Pinterest",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            "onclick": onClickPinterest
+            //"onclick": onClickPinterest
         });
     }
     if (enablePexel) {
         var Pexel = chrome.contextMenus.create({
+            "id": "Pexel",
             "title": "Pexel",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            "onclick": onClickPexel
+            //"onclick": onClickPexel
         });
     }
     if (enablePixaBay) {
         var PixaBay = chrome.contextMenus.create({
+            "id": "PixaBay",
             "title": "PixaBay",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            "onclick": onClickPixaBay
+            //"onclick": onClickPixaBay
         });
     }
     if (enablePixiv) {
         var Pixiv = chrome.contextMenus.create({
+            "id": "Pixiv",
             "title": "Pixiv",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            "onclick": onClickPixiv
+            //"onclick": onClickPixiv
         });
     }
 }
+function rebuildMenu():void{
+    chrome.contextMenus.removeAll(initialization);
+}
 initialization();
+chrome.runtime.onMessage.addListener((message,sender,sendResponse)=>{
+    if(message==="Options changed")
+        rebuildMenu();
+    console.log(message);
+});
+chrome.runtime.onStartup.addListener(rebuildMenu);
+chrome.runtime.onInstalled.addListener(rebuildMenu);
