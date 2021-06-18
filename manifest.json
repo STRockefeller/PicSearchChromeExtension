@@ -1,7 +1,7 @@
 {
-    "name": "More image - More idea - More inspiration",
-    "description": "An image search helper. ",
-    "version": "0.1.0",
+    "name": "Get Inspiration by Searching",
+    "description": "An image search helper for artists and creators. You can search images on popular  sites with simple steps by this extension.",
+    "version": "1.0.0",
     "manifest_version": 3,
     "permissions": ["contextMenus", "storage"],
     "action": {

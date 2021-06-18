@@ -4,9 +4,17 @@ var enablePinterest: boolean;
 var enablePixaBay: boolean;
 var enablePexel: boolean;
 var enablePixiv: boolean;
+var enableAbduzeedo: boolean;
+var enableBehance: boolean;
+var enableDesignspiration: boolean;
+var enableDesignSponge: boolean;
+var enableDribble: boolean;
+var enableInspirationde: boolean;
+var enableJuxtapoz: boolean;
+var enableNotefolio: boolean;
 var pixivBookmarkComboBox: string;
 function link(url: string): void { chrome.tabs.create({ "url": url }); }
-function onClickPinterest(info, tab): void { link("https://www.pinterest.com/search/pins/?q=%s" + info.selectionText) }
+function onClickPinterest(info, tab): void { link("https://www.pinterest.com/search/pins/?q=" + info.selectionText) }
 function onClickUnsplash(info, tab): void { link("https://unsplash.com/s/photos/" + info.selectionText) }
 function onClickCreativeCommons(info, tab): void { link("https://creativecommons.org/?s=" + info.selectionText) }
 function onClickPexel(info, tab): void { link("https://www.pexels.com/search/" + info.selectionText) }
@@ -41,6 +49,14 @@ function onClickPixiv(info, tab): void {
     }
     link("https://www.pixiv.net/tags/" + info.selectionText + extraKeywords + "/artworks?s_mode=s_tag");
 }
+function onClickAbduzeedo(info, tab): void { link(`https://abduzeedo.com/search/node?keys=${info.selectionText}`) };
+function onClickBehance(info, tab): void { link(`https://www.behance.net/?tracking_source=typeahead_search_direct&search=${info.selectionText}`) };
+function onClickDesignspiration(info, tab): void { link(`https://www.designspiration.com/search/saves/?q=${info.selectionText}&qa=typed&term_meta%5B%5D=${info.selectionText}%7Ctyped%7Cword%7C0`) };
+function onClickDesignSponge(info, tab): void { link(`https://www.designsponge.com/?s=${info.selectionText}`) };
+function onClickDribble(info, tab): void { link(`https://dribbble.com/search/${info.selectionText}`) };
+function onClickInspirationde(info, tab): void { link(`https://www.inspirationde.com/?s=${info.selectionText}&q=`) };
+function onClickJuxtapoz(info, tab): void { link(`https://www.juxtapoz.com/search/${info.selectionText}/`) };
+function onClickNotefolio(info, tab): void { link(`https://notefolio.net/?work_categories=&order=noted&from=all&q=${info.selectionText}`) };
 chrome.contextMenus.onClicked.addListener(function (info, tab): void {
     switch (info.menuItemId) {
         case "Pinterest":
@@ -61,6 +77,30 @@ chrome.contextMenus.onClicked.addListener(function (info, tab): void {
         case "Pixiv":
             onClickPixiv(info, tab);
             break;
+        case "Abduzeedo":
+            onClickAbduzeedo(info,tab);
+            break;
+        case "Behance":
+            onClickBehance(info,tab);
+            break;
+        case "Designspiration":
+            onClickDesignspiration(info,tab);
+            break;
+        case "DesignSponge":
+            onClickDesignSponge(info,tab);
+            break;
+        case "Dribble":
+            onClickDribble(info,tab);
+            break;
+        case "Inspirationde":
+            onClickInspirationde(info,tab);
+            break;
+        case "Juxtapoz":
+            onClickJuxtapoz(info,tab);
+            break;
+        case "Notefolio":
+            onClickNotefolio(info,tab);
+            break;
         default:
             console.log("onClickedListener undefined value");
             console.log(info.menuItemId);
@@ -75,6 +115,14 @@ function initialization(): void {
         enablePixaBay: true,
         enablePexel: true,
         enablePixiv: true,
+        enableAbduzeedo: true,
+        enableBehance: true,
+        enableDesignspiration: true,
+        enableDesignSponge: true,
+        enableDribble: true,
+        enableInspirationde: true,
+        enableJuxtapoz: true,
+        enableNotefolio: true,
         pixivBookmarkComboBox: 'disable'
     }, function (items): void {
         enableCreativeCommons = items.enableCreativeCommons as boolean;
@@ -84,23 +132,39 @@ function initialization(): void {
         enablePexel = items.enablePexel as boolean;
         enablePixiv = items.enablePixiv as boolean;
         pixivBookmarkComboBox = items.pixivBookmarkComboBox as string;
+        enableAbduzeedo = items.enableAbduzeedo as boolean;
+        enableBehance = items.enableBehance as boolean;
+        enableDesignspiration = items.enableDesignspiration as boolean;
+        enableDesignSponge = items.enableDesignSponge as boolean;
+        enableDribble = items.enableDribble as boolean;
+        enableInspirationde = items.enableInspirationde as boolean;
+        enableJuxtapoz = items.enableJuxtapoz as boolean;
+        enableNotefolio = items.enableNotefolio as boolean;
         createMenu();
     });
 }
 function createMenu(): void {
     var parent = chrome.contextMenus.create({
         "id": "parent",
-        "title": "Search %s by",
+        "title": "Search \"%s\" by",
         "contexts": ['all'],
     });
-    if (enableUnsplash) {
-        var Unsplash = chrome.contextMenus.create({
-            "id": "Unsplash",
-            "title": "Unsplash",
+    if (enableAbduzeedo) {
+        var Abduzeedo = chrome.contextMenus.create({
+            "id": "Abduzeedo",
+            "title": "Abduzeedo",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            //"onclick": onClickUnsplash
+        });
+    }
+    if (enableBehance) {
+        var Behance = chrome.contextMenus.create({
+            "id": "Behance",
+            "title": "Behance",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent,
         });
     }
     if (enableCreativeCommons) {
@@ -110,17 +174,60 @@ function createMenu(): void {
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            //"onclick": onClickCreativeCommons
         });
     }
-    if (enablePinterest) {
-        var Pinterest = chrome.contextMenus.create({
-            "id": "Pinterest",
-            "title": "Pinterest",
+    if (enableDesignspiration) {
+        var Designspiration = chrome.contextMenus.create({
+            "id": "Designspiration",
+            "title": "Designspiration",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            //"onclick": onClickPinterest
+        });
+    }
+    if (enableDesignSponge) {
+        var DesignSponge = chrome.contextMenus.create({
+            "id": "DesignSponge",
+            "title": "DesignSponge",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent,
+        });
+    }
+    if (enableDribble) {
+        var Dribble = chrome.contextMenus.create({
+            "id": "Dribble",
+            "title": "Dribble",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent,
+        });
+    }
+    if (enableInspirationde) {
+        var Inspirationde = chrome.contextMenus.create({
+            "id": "Inspirationde",
+            "title": "Inspirationde",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent,
+        });
+    }
+    if (enableJuxtapoz) {
+        var Juxtapoz = chrome.contextMenus.create({
+            "id": "Juxtapoz",
+            "title": "Juxtapoz",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent,
+        });
+    }
+    if (enableNotefolio) {
+        var Notefolio = chrome.contextMenus.create({
+            "id": "Notefolio",
+            "title": "Notefolio",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent,
         });
     }
     if (enablePexel) {
@@ -130,7 +237,15 @@ function createMenu(): void {
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            //"onclick": onClickPexel
+        });
+    }
+    if (enablePinterest) {
+        var Pinterest = chrome.contextMenus.create({
+            "id": "Pinterest",
+            "title": "Pinterest",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent,
         });
     }
     if (enablePixaBay) {
@@ -140,7 +255,6 @@ function createMenu(): void {
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            //"onclick": onClickPixaBay
         });
     }
     if (enablePixiv) {
@@ -150,16 +264,24 @@ function createMenu(): void {
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
-            //"onclick": onClickPixiv
+        });
+    }
+    if (enableUnsplash) {
+        var Unsplash = chrome.contextMenus.create({
+            "id": "Unsplash",
+            "title": "Unsplash",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent,
         });
     }
 }
-function rebuildMenu():void{
+function rebuildMenu(): void {
     chrome.contextMenus.removeAll(initialization);
 }
 initialization();
-chrome.runtime.onMessage.addListener((message,sender,sendResponse)=>{
-    if(message==="Options changed")
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message === "Options changed")
         rebuildMenu();
     console.log(message);
 });

@@ -4,9 +4,17 @@ var enablePinterest;
 var enablePixaBay;
 var enablePexel;
 var enablePixiv;
+var enableAbduzeedo;
+var enableBehance;
+var enableDesignspiration;
+var enableDesignSponge;
+var enableDribble;
+var enableInspirationde;
+var enableJuxtapoz;
+var enableNotefolio;
 var pixivBookmarkComboBox;
 function link(url) { chrome.tabs.create({ "url": url }); }
-function onClickPinterest(info, tab) { link("https://www.pinterest.com/search/pins/?q=%s" + info.selectionText); }
+function onClickPinterest(info, tab) { link("https://www.pinterest.com/search/pins/?q=" + info.selectionText); }
 function onClickUnsplash(info, tab) { link("https://unsplash.com/s/photos/" + info.selectionText); }
 function onClickCreativeCommons(info, tab) { link("https://creativecommons.org/?s=" + info.selectionText); }
 function onClickPexel(info, tab) { link("https://www.pexels.com/search/" + info.selectionText); }
@@ -41,6 +49,22 @@ function onClickPixiv(info, tab) {
     }
     link("https://www.pixiv.net/tags/" + info.selectionText + extraKeywords + "/artworks?s_mode=s_tag");
 }
+function onClickAbduzeedo(info, tab) { link("https://abduzeedo.com/search/node?keys=" + info.selectionText); }
+;
+function onClickBehance(info, tab) { link("https://www.behance.net/?tracking_source=typeahead_search_direct&search=" + info.selectionText); }
+;
+function onClickDesignspiration(info, tab) { link("https://www.designspiration.com/search/saves/?q=" + info.selectionText + "&qa=typed&term_meta%5B%5D=" + info.selectionText + "%7Ctyped%7Cword%7C0"); }
+;
+function onClickDesignSponge(info, tab) { link("https://www.designsponge.com/?s=" + info.selectionText); }
+;
+function onClickDribble(info, tab) { link("https://dribbble.com/search/" + info.selectionText); }
+;
+function onClickInspirationde(info, tab) { link("https://www.inspirationde.com/?s=" + info.selectionText + "&q="); }
+;
+function onClickJuxtapoz(info, tab) { link("https://www.juxtapoz.com/search/" + info.selectionText + "/"); }
+;
+function onClickNotefolio(info, tab) { link("https://notefolio.net/?work_categories=&order=noted&from=all&q=" + info.selectionText); }
+;
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
     switch (info.menuItemId) {
         case "Pinterest":
@@ -61,6 +85,30 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
         case "Pixiv":
             onClickPixiv(info, tab);
             break;
+        case "Abduzeedo":
+            onClickAbduzeedo(info, tab);
+            break;
+        case "Behance":
+            onClickBehance(info, tab);
+            break;
+        case "Designspiration":
+            onClickDesignspiration(info, tab);
+            break;
+        case "DesignSponge":
+            onClickDesignSponge(info, tab);
+            break;
+        case "Dribble":
+            onClickDribble(info, tab);
+            break;
+        case "Inspirationde":
+            onClickInspirationde(info, tab);
+            break;
+        case "Juxtapoz":
+            onClickJuxtapoz(info, tab);
+            break;
+        case "Notefolio":
+            onClickNotefolio(info, tab);
+            break;
         default:
             console.log("onClickedListener undefined value");
             console.log(info.menuItemId);
@@ -75,6 +123,14 @@ function initialization() {
         enablePixaBay: true,
         enablePexel: true,
         enablePixiv: true,
+        enableAbduzeedo: true,
+        enableBehance: true,
+        enableDesignspiration: true,
+        enableDesignSponge: true,
+        enableDribble: true,
+        enableInspirationde: true,
+        enableJuxtapoz: true,
+        enableNotefolio: true,
         pixivBookmarkComboBox: 'disable'
     }, function (items) {
         enableCreativeCommons = items.enableCreativeCommons;
@@ -84,19 +140,36 @@ function initialization() {
         enablePexel = items.enablePexel;
         enablePixiv = items.enablePixiv;
         pixivBookmarkComboBox = items.pixivBookmarkComboBox;
+        enableAbduzeedo = items.enableAbduzeedo;
+        enableBehance = items.enableBehance;
+        enableDesignspiration = items.enableDesignspiration;
+        enableDesignSponge = items.enableDesignSponge;
+        enableDribble = items.enableDribble;
+        enableInspirationde = items.enableInspirationde;
+        enableJuxtapoz = items.enableJuxtapoz;
+        enableNotefolio = items.enableNotefolio;
         createMenu();
     });
 }
 function createMenu() {
     var parent = chrome.contextMenus.create({
         "id": "parent",
-        "title": "Search %s by",
+        "title": "Search \"%s\" by",
         "contexts": ['all']
     });
-    if (enableUnsplash) {
-        var Unsplash = chrome.contextMenus.create({
-            "id": "Unsplash",
-            "title": "Unsplash",
+    if (enableAbduzeedo) {
+        var Abduzeedo = chrome.contextMenus.create({
+            "id": "Abduzeedo",
+            "title": "Abduzeedo",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent
+        });
+    }
+    if (enableBehance) {
+        var Behance = chrome.contextMenus.create({
+            "id": "Behance",
+            "title": "Behance",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent
@@ -111,10 +184,55 @@ function createMenu() {
             "parentId": parent
         });
     }
-    if (enablePinterest) {
-        var Pinterest = chrome.contextMenus.create({
-            "id": "Pinterest",
-            "title": "Pinterest",
+    if (enableDesignspiration) {
+        var Designspiration = chrome.contextMenus.create({
+            "id": "Designspiration",
+            "title": "Designspiration",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent
+        });
+    }
+    if (enableDesignSponge) {
+        var DesignSponge = chrome.contextMenus.create({
+            "id": "DesignSponge",
+            "title": "DesignSponge",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent
+        });
+    }
+    if (enableDribble) {
+        var Dribble = chrome.contextMenus.create({
+            "id": "Dribble",
+            "title": "Dribble",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent
+        });
+    }
+    if (enableInspirationde) {
+        var Inspirationde = chrome.contextMenus.create({
+            "id": "Inspirationde",
+            "title": "Inspirationde",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent
+        });
+    }
+    if (enableJuxtapoz) {
+        var Juxtapoz = chrome.contextMenus.create({
+            "id": "Juxtapoz",
+            "title": "Juxtapoz",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent
+        });
+    }
+    if (enableNotefolio) {
+        var Notefolio = chrome.contextMenus.create({
+            "id": "Notefolio",
+            "title": "Notefolio",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent
@@ -124,6 +242,15 @@ function createMenu() {
         var Pexel = chrome.contextMenus.create({
             "id": "Pexel",
             "title": "Pexel",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent
+        });
+    }
+    if (enablePinterest) {
+        var Pinterest = chrome.contextMenus.create({
+            "id": "Pinterest",
+            "title": "Pinterest",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent
@@ -142,6 +269,15 @@ function createMenu() {
         var Pixiv = chrome.contextMenus.create({
             "id": "Pixiv",
             "title": "Pixiv",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent
+        });
+    }
+    if (enableUnsplash) {
+        var Unsplash = chrome.contextMenus.create({
+            "id": "Unsplash",
+            "title": "Unsplash",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent

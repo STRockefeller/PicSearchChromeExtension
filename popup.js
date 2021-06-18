@@ -4,22 +4,20 @@ var enablePinterest;
 var enablePixaBay;
 var enablePexel;
 var enablePixiv;
+var enableAbduzeedo;
+var enableBehance;
+var enableDesignspiration;
+var enableDesignSponge;
+var enableDribble;
+var enableInspirationde;
+var enableJuxtapoz;
+var enableNotefolio;
 var pixivBookmarkComboBox;
-$("#btn-Unsplash").click(function () {
-    newTab("https://unsplash.com/s/photos/" + $("#keyWords").val());
-});
-$("#btn-CreativeCommons").click(function () {
-    newTab("https://creativecommons.org/?s=" + $("#keyWords").val());
-});
-$("#btn-Pinterest").click(function () {
-    newTab("https://www.pinterest.com/search/pins/?q=" + $("#keyWords").val());
-});
-$("#btn-Pexel").click(function () {
-    newTab("https://www.pexels.com/search/" + $("#keyWords").val());
-});
-$("#btn-PixaBay").click(function () {
-    newTab("https://pixabay.com/images/search/" + $("#keyWords").val());
-});
+$("#btn-Unsplash").click(function () { return newTab("https://unsplash.com/s/photos/" + $("#keyWords").val()); });
+$("#btn-CreativeCommons").click(function () { return newTab("https://creativecommons.org/?s=" + $("#keyWords").val()); });
+$("#btn-Pinterest").click(function () { return newTab("https://www.pinterest.com/search/pins/?q=" + $("#keyWords").val()); });
+$("#btn-Pexel").click(function () { return newTab("https://www.pexels.com/search/" + $("#keyWords").val()); });
+$("#btn-PixaBay").click(function () { return newTab("https://pixabay.com/images/search/" + $("#keyWords").val()); });
 $("#btn-Pixiv").click(function () {
     var extraKeywords;
     switch (pixivBookmarkComboBox) {
@@ -50,6 +48,14 @@ $("#btn-Pixiv").click(function () {
     }
     newTab("https://www.pixiv.net/tags/" + $("#keyWords").val() + extraKeywords + "/artworks?s_mode=s_tag");
 });
+$("#btn-Abduzeedo").click(function () { return newTab("https://abduzeedo.com/search/node?keys=" + $("#keyWords").val()); });
+$("#btn-Behance").click(function () { return newTab("https://www.behance.net/?tracking_source=typeahead_search_direct&search=" + $("#keyWords").val()); });
+$("#btn-Designspiration").click(function () { return newTab("https://www.designspiration.com/search/saves/?q=" + $("#keyWords").val() + "&qa=typed&term_meta%5B%5D=" + $("#keyWords").val() + "%7Ctyped%7Cword%7C0"); });
+$("#btn-DesignSponge").click(function () { return newTab("https://www.designsponge.com/?s=" + $("#keyWords").val()); });
+$("#btn-Dribble").click(function () { return newTab("https://dribbble.com/search/" + $("#keyWords").val()); });
+$("#btn-Inspirationde").click(function () { return newTab("https://www.inspirationde.com/?s=" + $("#keyWords").val() + "&q="); });
+$("#btn-Juxtapoz").click(function () { return newTab("https://www.juxtapoz.com/search/" + $("#keyWords").val() + "/"); });
+$("#btn-Notefolio").click(function () { return newTab("https://notefolio.net/?work_categories=&order=noted&from=all&q=" + $("#keyWords").val()); });
 $("#btn-Setting").click(function () {
     if (chrome.runtime.openOptionsPage)
         chrome.runtime.openOptionsPage();
@@ -71,6 +77,22 @@ function btnVisibility() {
             $(".show-Pexel").hide();
         if (!enablePixiv)
             $(".show-Pixiv").hide();
+        if (!enableAbduzeedo)
+            $(".show-Abduzeedo").hide();
+        if (!enableBehance)
+            $(".show-Behance").hide();
+        if (!enableDesignspiration)
+            $(".show-Designspiration").hide();
+        if (!enableDesignSponge)
+            $(".show-DesignSponge").hide();
+        if (!enableDribble)
+            $(".show-Dribble").hide();
+        if (!enableInspirationde)
+            $(".show-Inspirationde").hide();
+        if (!enableJuxtapoz)
+            $(".show-Juxtapoz").hide();
+        if (!enableNotefolio)
+            $(".show-Notefolio").hide();
     }
     catch (error) {
         console.log(error);
@@ -85,7 +107,15 @@ function initialization() {
         enablePixaBay: true,
         enablePexel: true,
         enablePixiv: true,
-        pixivBookmarkComboBox: 'disable'
+        pixivBookmarkComboBox: 'disable',
+        enableAbduzeedo: true,
+        enableBehance: true,
+        enableDesignspiration: true,
+        enableDesignSponge: true,
+        enableDribble: true,
+        enableInspirationde: true,
+        enableJuxtapoz: true,
+        enableNotefolio: true
     }, function (items) {
         enableCreativeCommons = items.enableCreativeCommons;
         enableUnsplash = items.enableUnsplash;
@@ -94,6 +124,14 @@ function initialization() {
         enablePexel = items.enablePexel;
         enablePixiv = items.enablePixiv;
         pixivBookmarkComboBox = items.pixivBookmarkComboBox;
+        enableAbduzeedo = items.enableAbduzeedo;
+        enableBehance = items.enableBehance;
+        enableDesignspiration = items.enableDesignspiration;
+        enableDesignSponge = items.enableDesignSponge;
+        enableDribble = items.enableDribble;
+        enableInspirationde = items.enableInspirationde;
+        enableJuxtapoz = items.enableJuxtapoz;
+        enableNotefolio = items.enableNotefolio;
         btnVisibility();
     });
 }
