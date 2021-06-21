@@ -13,19 +13,19 @@ You can search images on popular  sites with simple steps.
 
 ### Using the context menus
 
-1. Highlight any text you wan to search.
-2. Right click to show the context menus.
+1. Highlight any text you want to search.
+2. Right-click to show the context menus.
 3. Choose a site.
 
 ### Options (Setting)
 
 1. You can hide the sites you don't use by canceled the check boxes.
 2. You can specify a limit on the number of bookmarks on Pixiv. ( Pixiv member only )
-3. Remember to click "Save" button to apply changes.
+3. Remember to click the "Save" button to apply changes.
 
 ## Notice
 
-1. DONNOT copy a copyrighted work without a license from the original author.
+1. DO NOT copy a copyrighted work without a license from the original author.
 2. Sometimes the search results will be different if you are not logged in to the site.
 
 ## Available Websites (v1.0.0)
