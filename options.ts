@@ -28,6 +28,8 @@ function save_options(): void {
     var enablePixiv = document.getElementById('cbx-Pixiv').checked;
     var enableUnsplash = document.getElementById('cbx-Unsplash').checked;
     var pixivBookmarkComboBox = document.getElementById('PixivBookmarkComboBox').value;
+    var enableArtStation = document.getElementById('cbx-ArtStation').checked;
+    var enableDeviantArt = document.getElementById('cbx-DeviantArt').checked;
     chrome.storage.sync.set({
         enableAbduzeedo: enableAbduzeedo,
         enableBehance: enableBehance,
@@ -43,7 +45,9 @@ function save_options(): void {
         enablePixaBay: enablePixaBay,
         enablePixiv: enablePixiv,
         enableUnsplash: enableUnsplash,
-        pixivBookmarkComboBox: pixivBookmarkComboBox
+        pixivBookmarkComboBox: pixivBookmarkComboBox,
+        enableArtStation: enableArtStation,
+        enableDeviantArt: enableDeviantArt
     }, function () {
         var status = document.getElementById('status');
         status.textContent = 'Options saved.';
@@ -69,7 +73,9 @@ function restore_options(): void {
         enablePixaBay: true,
         enablePixiv: true,
         enableUnsplash: true,
-        pixivBookmarkComboBox: 'disable'
+        pixivBookmarkComboBox: 'disable',
+        enableArtStation: true,
+        enableDeviantArt: true
     }, function (items): void {
         document.getElementById('cbx-Abduzeedo').checked = items.enableAbduzeedo;
         document.getElementById('cbx-Behance').checked = items.enableBehance;
@@ -86,6 +92,8 @@ function restore_options(): void {
         document.getElementById('cbx-Pixiv').checked = items.enablePixiv;
         document.getElementById('cbx-Unsplash').checked = items.enableUnsplash;
         document.getElementById('PixivBookmarkComboBox').value = items.pixivBookmarkComboBox;
+        document.getElementById('cbx-ArtStation').checked = items.enableArtStation;
+        document.getElementById('cbx-DeviantArt').checked = items.enableDeviantArt;
         activeInitialize();
     });
 }

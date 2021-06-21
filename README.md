@@ -31,10 +31,12 @@ You can search images on popular  sites with simple steps.
 ## Available Websites (v1.0.0)
 
 - Abduzeedo
+- Art Station
 - Behance
 - Creative Commons
 - Designspiration
 - Design*Sponge
+- Deviant Art
 - Dribble
 - Inspirationde
 - Juxtapoz

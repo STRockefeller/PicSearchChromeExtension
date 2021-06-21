@@ -13,6 +13,8 @@ var enableInspirationde: boolean;
 var enableJuxtapoz: boolean;
 var enableNotefolio: boolean;
 var pixivBookmarkComboBox: string;
+var enableArtStation: boolean;
+var enableDeviantArt: boolean;
 function link(url: string): void { chrome.tabs.create({ "url": url }); }
 function onClickPinterest(info, tab): void { link("https://www.pinterest.com/search/pins/?q=" + info.selectionText) }
 function onClickUnsplash(info, tab): void { link("https://unsplash.com/s/photos/" + info.selectionText) }
@@ -57,6 +59,8 @@ function onClickDribble(info, tab): void { link(`https://dribbble.com/search/${i
 function onClickInspirationde(info, tab): void { link(`https://www.inspirationde.com/?s=${info.selectionText}&q=`) };
 function onClickJuxtapoz(info, tab): void { link(`https://www.juxtapoz.com/search/${info.selectionText}/`) };
 function onClickNotefolio(info, tab): void { link(`https://notefolio.net/?work_categories=&order=noted&from=all&q=${info.selectionText}`) };
+function onClickArtStation(info, tab): void { link(`https://www.artstation.com/search?q=${info.selectionText}&sort_by=relevance`) };
+function onClickDeviantArt(info, tab): void { link(`https://www.deviantart.com/search?q=${info.selectionText}`) };
 chrome.contextMenus.onClicked.addListener(function (info, tab): void {
     switch (info.menuItemId) {
         case "Pinterest":
@@ -101,6 +105,12 @@ chrome.contextMenus.onClicked.addListener(function (info, tab): void {
         case "Notefolio":
             onClickNotefolio(info,tab);
             break;
+        case "ArtStation":
+            onClickArtStation(info,tab);
+            break;
+        case "DeviantArt":
+            onClickDeviantArt(info,tab);
+            break;
         default:
             console.log("onClickedListener undefined value");
             console.log(info.menuItemId);
@@ -123,7 +133,9 @@ function initialization(): void {
         enableInspirationde: true,
         enableJuxtapoz: true,
         enableNotefolio: true,
-        pixivBookmarkComboBox: 'disable'
+        pixivBookmarkComboBox: 'disable',
+        enableArtStation: true,
+        enableDeviantArt: true
     }, function (items): void {
         enableCreativeCommons = items.enableCreativeCommons as boolean;
         enableUnsplash = items.enableUnsplash as boolean;
@@ -140,6 +152,8 @@ function initialization(): void {
         enableInspirationde = items.enableInspirationde as boolean;
         enableJuxtapoz = items.enableJuxtapoz as boolean;
         enableNotefolio = items.enableNotefolio as boolean;
+        enableArtStation = items.enableArtStation as boolean;
+        enableDeviantArt = items.enableDeviantArt as boolean;
         createMenu();
     });
 }
@@ -153,6 +167,15 @@ function createMenu(): void {
         var Abduzeedo = chrome.contextMenus.create({
             "id": "Abduzeedo",
             "title": "Abduzeedo",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent,
+        });
+    }
+    if (enableArtStation) {
+        var Unsplash = chrome.contextMenus.create({
+            "id": "ArtStation",
+            "title": "Art Station",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,
@@ -189,6 +212,15 @@ function createMenu(): void {
         var DesignSponge = chrome.contextMenus.create({
             "id": "DesignSponge",
             "title": "DesignSponge",
+            "type": "normal",
+            "contexts": ['all'],
+            "parentId": parent,
+        });
+    }
+    if (enableDeviantArt) {
+        var Unsplash = chrome.contextMenus.create({
+            "id": "DeviantArt",
+            "title": "Deviant Art",
             "type": "normal",
             "contexts": ['all'],
             "parentId": parent,

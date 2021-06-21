@@ -13,7 +13,8 @@ var enableInspirationde: boolean;
 var enableJuxtapoz: boolean;
 var enableNotefolio: boolean;
 var pixivBookmarkComboBox: string;
-
+var enableArtStation:boolean;
+var enableDeviantArt:boolean;
 $("#btn-Unsplash").click(() => newTab("https://unsplash.com/s/photos/" + $("#keyWords").val()));
 $("#btn-CreativeCommons").click(() => newTab("https://creativecommons.org/?s=" + $("#keyWords").val()));
 $("#btn-Pinterest").click(() => newTab("https://www.pinterest.com/search/pins/?q=" + $("#keyWords").val()));
@@ -57,6 +58,9 @@ $("#btn-Dribble").click(() => newTab(`https://dribbble.com/search/${$("#keyWords
 $("#btn-Inspirationde").click(() => newTab(`https://www.inspirationde.com/?s=${$("#keyWords").val()}&q=`));
 $("#btn-Juxtapoz").click(() => newTab(`https://www.juxtapoz.com/search/${$("#keyWords").val()}/`));
 $("#btn-Notefolio").click(() => newTab(`https://notefolio.net/?work_categories=&order=noted&from=all&q=${$("#keyWords").val()}`));
+$("#btn-ArtStation").click(() => newTab(`https://www.artstation.com/search?q=${$("#keyWords").val()}&sort_by=relevance`));
+$("#btn-DeviantArt").click(() => newTab(`https://www.deviantart.com/search?q=${$("#keyWords").val()}`));
+
 $("#btn-Setting").click(function () {
     if (chrome.runtime.openOptionsPage)
         chrome.runtime.openOptionsPage();
@@ -94,6 +98,10 @@ function btnVisibility(): void {
             $(".show-Juxtapoz").hide();
         if (!enableNotefolio)
             $(".show-Notefolio").hide();
+        if(!enableArtStation)
+            $(".show-ArtStation").hide();
+        if(!enableDeviantArt)
+            $(".show-DeviantArt").hide();
     } catch (error) {
         console.log(error);
         debugger;
@@ -115,7 +123,9 @@ function initialization(): void {
         enableDribble: true,
         enableInspirationde: true,
         enableJuxtapoz: true,
-        enableNotefolio: true
+        enableNotefolio: true,
+        enableArtStation: true,
+        enableDeviantArt: true
     }, function (items): void {
         enableCreativeCommons = items.enableCreativeCommons as boolean;
         enableUnsplash = items.enableUnsplash as boolean;
@@ -132,6 +142,8 @@ function initialization(): void {
         enableInspirationde = items.enableInspirationde as boolean;
         enableJuxtapoz = items.enableJuxtapoz as boolean;
         enableNotefolio = items.enableNotefolio as boolean;
+        enableArtStation = items.enableArtStation as boolean;
+        enableDeviantArt = items.enableDeviantArt as boolean;
         btnVisibility();
     });
 }

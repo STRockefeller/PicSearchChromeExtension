@@ -1,0 +1,24 @@
+{
+    "name": "Get Inspiration by Searching",
+    "description": "An image search helper for artists and creators. You can search images on popular sites with simple steps by this extension.",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "permissions": ["contextMenus", "storage"],
+    "action": {
+        "default_icon": "icons/icon128.png",
+        "default_popup": "popup.html"
+    },
+    "options_ui": {
+        "page": "options.html"
+    },
+    "background": {
+        "service_worker": "event.js"
+    },
+    "icons":{
+        "16":"icons/icon16.png",
+        "24":"icons/icon24.png",
+        "32":"icons/icon32.png",
+        "48":"icons/icon48.png",
+        "128":"icons/icon128.png"
+    }
+}
